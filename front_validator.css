@@ -2,3 +2,4 @@
 .text-error, .label-has-error {color: #FF4D4D;}
 .text-error {display: inline-block; margin-bottom: 10px; width: 100%;}
 input.dateField[required] {box-shadow: none;}
+.list-unstyled li {list-style-type: none;}
