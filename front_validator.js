@@ -1,10 +1,22 @@
 var validateField = function(field) {
     // please add data-title="field name" on form field
     var fieldName = field.data("title") ? field.data("title") : field.prop("title");
+    var validations = [];
+    var isRequired = false;
+
+    if (field.data('validation')) {
+        validations = field.data('validation').split(',');
+    }
+
+    if (validations.indexOf('required') > -1) {
+        isRequired = true;
+    }
+
+
     // validate checkbox or radio 
     // this field request data-label attribute that
     // targets id of label
-    if (field.is(':checkbox') || field.is(':radio')) {
+    if (isRequired && (field.is(':checkbox') || field.is(':radio'))) {
         var checkboxGroup = $('[name="' + field.prop('name') + '"]'),
             checked = false;
         $.each(checkboxGroup, function(key, val) {
@@ -14,48 +26,42 @@ var validateField = function(field) {
         });
         // require if checked or not
         if (!checked) {
-            $(field.data("label")).addClass('label-has-error')
+            $(field.data("label")).addClass('label-has-error');
             return false;
         } 
-        $(field.data("label")).removeClass('label-has-error')
+        $(field.data("label")).removeClass('label-has-error');
         return true;
     }
     // validate input fields
     else {
-        var isValid = true, message = "";
+        var isValid = true; 
+        var messages = [];
+        var d = new Date(),
+        var = fieldArr = field.val().split('/');
+        var fieldDate = new Date(fieldArr[2] + "-" + fieldArr[1] + "-" + fieldArr[0]);
 
         // validate if required
-        if (field.val().length < 1) {
+        if (isRequired && field.val().length < 1) {
             message = fieldName + " is required.";
             isValid = false;
         }
 
         // validate if date is past or future
-        if (field.val().length > 0 && field.data('accepts-date')) {
-          var d = new Date(),
-            fieldArr = field.val().split('/'),
-            fieldDate = new Date(fieldArr[2] + "-" + fieldArr[1] + "-" + fieldArr[0]);
-          switch(field.data('accepts-date')) {
-            case 'future':
-              if (fieldDate < d) {
-                message = fieldName + " accepts only future date.";
-                isValid =  false;
-              }
-            break;
-            case 'past':
-              if (fieldDate >= d) {
-                message = fieldName + " accepts only past date.";
-                isValid =  false;
-              }
-            break;
-            default:
-              isValid =  true;
-          }
+        if (field.val().length > 0 && validations.indexOf('past-date') > -1 && fieldDate >= d) {
+            message = fieldName + " accepts only past date.";
+            isValid =  false;
+        }
+        if (field.val().length > 0 && validations.indexOf('future-date') > -1 && fieldDate < d) {
+            message = fieldName + " accepts only future date.";
+            isValid =  false;
         }
 
-        var errorContainer = $('[data-error-id="' + field.prop("name") + '"]'),
-            errorContainerTemplate = $('<span class="text-error" data-error-id="' + field.prop("name") + '" />'),
-            inputContainer = field.closest("div");
+        if (field.val().length > 0 && validations.indexOf('regex') > -1) {
+        }
+
+        var errorContainer = $('[data-error-id="' + field.prop("name") + '"]');
+        var errorContainerTemplate = $('<span class="text-error" data-error-id="' + field.prop("name") + '" />');
+        var inputContainer = field.closest("div");
 
         if (!isValid) {
             field.addClass('input-error')
@@ -71,5 +77,4 @@ var validateField = function(field) {
         } 
         return isValid;
     }
-
 }
