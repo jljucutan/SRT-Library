@@ -22,4 +22,9 @@ Using vanilla js:
 ```
 validateField(document.getElementById('myRequiredField'));
 ```
+### Notes
+The validator will detect the field name title and use it on error labeling. You should therefore set the data-title attibute from FormOptions on ceForm:
+```
+data-title='Signature'
+```
 
