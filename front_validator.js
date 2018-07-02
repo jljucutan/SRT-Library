@@ -48,7 +48,6 @@ var validateField = function(field) {
     var hasVal = field.val().length > 0;
     var messages = [];
     var d = new Date();
-    var fieldArr = field.val().split('/');
     var fieldDate = new Date(field.val());
 
     // validate if required
