@@ -1,0 +1,4 @@
+.input-error, .input-error:focus {outline: none; border-radius: 3px; border: 1px solid rgba(255, 77, 77, 0.6) !important; box-shadow: 0 0 4px 0 rgba(255, 77, 77, 0.8) !important;}
+.text-error, .label-has-error {color: #FF4D4D;}
+.text-error {display: inline-block; margin-bottom: 10px; width: 100%;}
+input.dateField[required] {box-shadow: none;}
