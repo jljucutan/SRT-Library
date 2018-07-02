@@ -14,15 +14,30 @@ Right before your custom scripts on Main QF Area
 ```
 
 ### Usage
+Input fields requires configuration to work. ceForm fields should have the data-validation attribute.
+```
+data-validation='required'
+```
+
+Acceptable options are
+* required
+* past-date
+* future-date
+* regex
+
+data-validation attribute can have multiple options.
+```
+data-validation='required,past-date'
+```
+
 You can call the validator by selected the individual fields you want to be required.
 Using jQuery:
 ```
-validateField($('input#myRequiredField.required'));
+$('#form-input-button').on('change blur', function() {
+    validateField($(this));
+});
 ```
-Using vanilla js:
-```
-validateField(document.getElementById('myRequiredField'));
-```
+
 ### Notes
 The validator will detect the field name title and use it on error labeling. You should therefore set the data-title attibute from FormOptions on ceForm:
 ```
