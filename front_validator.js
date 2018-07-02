@@ -31,7 +31,7 @@ var validateField = function(field) {
         }
 
         // validate if date is past or future
-        if (field.val().length > 1 && field.data('accepts-date')) {
+        if (field.val().length > 0 && field.data('accepts-date')) {
           var d = new Date(),
             fieldArr = field.val().split('/'),
             fieldDate = new Date(fieldArr[2] + "-" + fieldArr[1] + "-" + fieldArr[0]);
