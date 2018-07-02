@@ -13,6 +13,7 @@ Right before your custom scripts on Main QF Area
 <script type="text/javascript" src="<$link;/main/RedCarpet/FormTemplates/FormSupport/js/front_validator.js>"></script>
 ```
 
+### Usage
 You can call the validator by selected the individual fields you want to be required.
 Using jQuery:
 ```
